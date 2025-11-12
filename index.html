@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sol Solar Solutions LLC | Solar • Wealth • Robotics</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --bg-dark: #050509;
+      --bg-card: #11111a;
+      --bg-card-soft: #181824;
+      --accent-gold: #f5c76b;
+      --accent-gold-soft: #f8e0a6;
+      --accent-blue: #3bb0ff;
+      --text-main: #f7f7ff;
+      --text-soft: #a8a8c0;
+      --border-subtle: #232334;
+      --radius-xl: 18px;
+      --shadow-soft: 0 18px 60px rgba(0, 0, 0, 0.55);
+      --transition: 0.22s ease-out;
+      --max-width: 1120px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #151524 0, #050509 52%);
+      color: var(--text-main);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .page { min-height: 100vh; display: flex; flex-direction: column; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom,
+        rgba(5, 5, 12, 0.96),
+        rgba(5, 5, 12, 0.82),
+        transparent);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #ffe39b, #f5c76b, #9b5b14);
+      box-shadow: 0 0 20px rgba(245, 199, 107, 0.65);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1a1104;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: 0.05em;
+    }
+
+    .brand-text { display: flex; flex-direction: column; gap: 2px; }
+    .brand-name { font-weight: 700; letter-spacing: 0.08em; font-size: 14px; text-transform: uppercase; }
+    .brand-tagline { font-size: 11px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.16em; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      color: var(--text-soft);
+      position: relative;
+      padding-bottom: 3px;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent-gold), var(--accent-blue));
+      transition: width var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--text-main); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta { display: flex; align-items: center; gap: 8px; }
+
+    .pill {
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-gold-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #3ecf8e;
+      box-shadow: 0 0 8px rgba(62, 207, 142, 0.8);
+    }
+
+    .btn-primary {
+      border-radius: 999px;
+      padding: 9px 16px;
+      background: linear-gradient(125deg, var(--accent-gold), var(--accent-blue));
+      color: #1a1204;
+      font-weight: 600;
+      font-size: 13px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 18px rgba(59, 176, 255, 0.45);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.06);
+      box-shadow: 0 0 26px rgba(59, 176, 255, 0.65);
+    }
+
+    .btn-outline {
+      border-radius: 999px;
+      padding: 9px 16px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: var(--text-main);
+      font-weight: 500;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: background var(--transition), border-color var(--transition),
+        color var(--transition), transform var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(245, 199, 107, 0.7);
+      transform: translateY(-1px);
+    }
+
+    .icon-arrow { font-size: 14px; }
+
+    .nav-toggle {
+      display: none;
+      border: none;
+      background: none;
+      color: var(--text-main);
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: block; }
+
+      .nav-links-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        padding: 0 18px 16px;
+        font-size: 15px;
+      }
+
+      .nav-links-mobile a { color: var(--text-soft); }
+      .nav-links-mobile a:hover { color: var(--text-main); }
+
+      .nav-links-mobile .nav-mobile-cta {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+    }
+
+    main { flex: 1; }
+    section { padding: 40px 18px; }
+    .section-inner { max-width: var(--max-width); margin: 0 auto; }
+
+    .hero { padding-top: 28px; padding-bottom: 52px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      border-radius: 999px;
+      padding: 5px 10px;
+      border: 1px solid rgba(245, 199, 107, 0.35);
+      background: radial-gradient(circle at left, rgba(245, 199, 107, 0.18), transparent);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-gold-soft);
+      margin-bottom: 14px;
+    }
+
+    .spark {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: radial-gradient(circle at center, #fff7db, #f5c76b, #b36b14);
+      box-shadow: 0 0 18px rgba(245, 199, 107, 0.8);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 4vw, 42px);
+      line-height: 1.08;
+      margin-bottom: 14px;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-title span.highlight {
+      background: linear-gradient(120deg, var(--accent-gold), var(--accent-blue));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: var(--text-soft);
+      max-width: 580px;
+      margin-bottom: 22px;
+    }
+
+    .hero-subtitle strong {
+      color: var(--accent-gold-soft);
+      font-weight: 600;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .hero-cta-note {
+      font-size: 12px;
+      color: var(--text-soft);
+      max-width: 520px;
+      margin-bottom: 14px;
+    }
+
+    .hero-meta {
+      font-size: 12px;
+      color: var(--text-soft);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dot { width: 7px; height: 7px; border-radius: 999px; background: var(--accent-blue); }
+
+    .hero-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .metric { display: flex; flex-direction: column; gap: 2px; }
+    .metric-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #71718e;
+    }
+    .metric-value { font-size: 15px; color: var(--accent-gold-soft); font-weight: 600; }
+
+    .hero-right-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Logo video card */
+    .logo-video-card {
+      border-radius: 20px;
+      background: radial-gradient(circle at top, #26263f, #090914);
+      border: 1px solid rgba(245, 199, 107, 0.55);
+      padding: 10px 10px 8px;
+      box-shadow: 0 0 28px rgba(245, 199, 107, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-video-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .logo-video-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #ffe9ba;
+    }
+
+    .logo-video-tag {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(5,5,20,0.7);
+      color: #f8e0a6;
+    }
+
+    .logo-video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: calc(605 / 482 * 100%);
+      height: 0;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: #000;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.85);
+    }
+
+    .logo-video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .logo-video-glow {
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at 20% -10%, rgba(245,199,107,0.25), transparent 55%),
+                  radial-gradient(circle at 80% 110%, rgba(59,176,255,0.3), transparent 55%);
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .logo-video-caption {
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-top: 4px;
+    }
+
+    .logo-video-caption strong { color: var(--accent-gold-soft); }
+
+    .hero-card {
+      border-radius: 26px;
+      background: radial-gradient(circle at top, #25253a, #090914);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-header {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .hero-card-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #d9ddff;
+    }
+
+    .hero-card-subtitle {
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-top: 4px;
+    }
+
+    .hero-card-tag {
+      font-size: 11px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(5, 5, 20, 0.55);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-card-main {
+      position: relative;
+      z-index: 1;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: radial-gradient(circle at top, #202649, #090914);
+      min-height: 190px;
+      padding: 14px 14px 12px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    @media (max-width: 450px) {
+      .hero-card-main { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    .hero-roof {
+      border-radius: 14px;
+      background: linear-gradient(145deg, #12121f, #050509);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .roof-label {
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9fa7ff;
+      background: rgba(5, 5, 20, 0.7);
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(159, 167, 255, 0.3);
+    }
+
+    .roof-graphic {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 12px;
+      background: radial-gradient(circle at top, #343b7a, #050509);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75);
+    }
+
+    .roof-panels {
+      position: absolute;
+      inset: 18% 10% 20%;
+      background-image: linear-gradient(120deg, rgba(0,0,0,0.35) 1px, transparent 1px),
+                        linear-gradient(0deg, rgba(0,0,0,0.35) 1px, transparent 1px);
+      background-size: 24px 24px;
+      border-radius: 6px;
+      box-shadow: 0 0 25px rgba(59, 176, 255, 0.55);
+      overflow: hidden;
+    }
+
+    .roof-sheen {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent 40%);
+      mix-blend-mode: screen;
+      opacity: 0.9;
+    }
+
+    .sun-orbit {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      width: 70px;
+      height: 70px;
+      border-radius: 999px;
+      background: radial-gradient(circle at center, #ffe9b8, #f5c76b, #a45b11);
+      box-shadow: 0 0 42px rgba(245,199,107,0.9);
+    }
+
+    .hero-data {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .stat-row { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
+
+    .stat-label {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 10px;
+      color: #72729b;
+    }
+
+    .stat-value {
+      font-size: 13px;
+      color: var(--accent-gold-soft);
+      font-weight: 600;
+    }
+
+    .hero-progress { margin-top: 6px; display: flex; flex-direction: column; gap: 6px; }
+
+    .progress-track {
+      width: 100%;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent-gold), var(--accent-blue), #7fffd4);
+      width: 82%;
+    }
+
+    .hero-card-footer {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .hero-card-footer strong { color: var(--accent-gold-soft); }
+
+    .hero-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .chip {
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: #c5c5e6;
+    }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #8e8eaa;
+      margin-bottom: 8px;
+    }
+
+    .section-title-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-end;
+      margin-bottom: 22px;
+    }
+
+    .section-title { font-size: 22px; }
+    .section-sub { font-size: 13px; color: var(--text-soft); max-width: 420px; }
+
+    @media (max-width: 640px) {
+      .section-title-row { flex-direction: column; align-items: flex-start; }
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    @media (max-width: 920px) {
+      .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 640px) {
+      .services-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-xl);
+      padding: 16px 16px 14px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.55);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition),
+        border-color var(--transition), background var(--transition);
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 55px rgba(0,0,0,0.75);
+      border-color: rgba(245,199,107,0.45);
+      background: radial-gradient(circle at top, #19192b, #0a0a12);
+    }
+
+    .service-pill {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #7f7f9f;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .service-title { font-size: 16px; margin-top: 4px; }
+    .service-body { font-size: 13px; color: var(--text-soft); flex: 1; }
+
+    .service-list { margin-top: 8px; list-style: none; font-size: 12px; color: #cbcbec; }
+    .service-list li { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+    .service-bullet { width: 6px; height: 6px; border-radius: 999px; background: var(--accent-blue); }
+
+    .service-footer {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #8e8eb0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .two-col-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 22px;
+    }
+    @media (max-width: 860px) {
+      .two-col-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    .video-card {
+      background: var(--bg-card-soft);
+      border-radius: var(--radius-xl);
+      padding: 16px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: #000;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .mini-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #8e8eb0;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .pill-small {
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      font-size: 11px;
+      color: #c1c1e6;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 22px;
+    }
+
+    @media (max-width: 880px) {
+      .contact-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    .contact-card {
+      background: var(--bg-card-soft);
+      border-radius: var(--radius-xl);
+      padding: 18px 16px 16px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .field { display: flex; flex-direction: column; gap: 5px; font-size: 12px; }
+    .field label { color: #c1c1dd; }
+
+    .field-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .field-row .field {
+      flex: 1;
+      min-width: 120px;
+    }
+
+    input, select, textarea {
+      background: #0b0b13;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.14);
+      padding: 8px 10px;
+      color: var(--text-main);
+      font-size: 13px;
+      outline: none;
+      transition: border-color var(--transition),
+        box-shadow var(--transition), background var(--transition);
+    }
+
+    input::placeholder, textarea::placeholder { color: #666689; }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: rgba(245,199,107,0.8);
+      box-shadow: 0 0 0 1px rgba(245,199,107,0.35);
+      background: #07070e;
+    }
+
+    textarea { min-height: 90px; resize: vertical; }
+
+    .form-footnote { font-size: 11px; color: var(--text-soft); margin-top: 4px; }
+
+    footer {
+      padding: 20px 18px 22px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      background: radial-gradient(circle at top, #141420, #050509);
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links { display: flex; flex-wrap: wrap; gap: 12px; }
+    .footer-links a { color: #a8a8c0; }
+    .footer-links a:hover { color: var(--accent-gold-soft); }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <nav class="nav">
+        <div class="brand">
+          <div class="brand-mark">SOL</div>
+          <div class="brand-text">
+            <div class="brand-name">Sol Solar Solutions LLC</div>
+            <div class="brand-tagline">Solar • Wealth Vehicles • Robotics</div>
+          </div>
+        </div>
+
+        <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleMobileNav()">☰</button>
+
+        <div class="nav-links">
+          <a href="#hero">Home</a>
+          <a href="#solar">Solar</a>
+          <a href="#wealth">Supreme Wealth Vehicle</a>
+          <a href="#robots">Pudu Robotics</a>
+          <a href="#videos">Video</a>
+          <a href="#lead">Apply / Book</a>
+        </div>
+
+        <div class="nav-cta">
+          <div class="pill">
+            <span class="pill-dot"></span>
+            Leads • Investors • Closers Wanted
+          </div>
+          <button class="btn-primary" onclick="scrollToSection('lead')">
+            Get Solar / Apply to Partner
+            <span class="icon-arrow">↗</span>
+          </button>
+        </div>
+      </nav>
+
+      <div id="mobileNav" class="nav-links-mobile" style="display:none;">
+        <a href="#hero" onclick="toggleMobileNav()">Home</a>
+        <a href="#solar" onclick="toggleMobileNav()">Solar</a>
+        <a href="#wealth" onclick="toggleMobileNav()">Supreme Wealth Vehicle</a>
+        <a href="#robots" onclick="toggleMobileNav()">Pudu Robotics</a>
+        <a href="#videos" onclick="toggleMobileNav()">Video</a>
+        <a href="#lead" onclick="toggleMobileNav()">Apply / Book</a>
+        <div class="nav-mobile-cta">
+          <button class="btn-primary" onclick="scrollToSection('lead'); toggleMobileNav();">
+            Start / Apply Now
+            <span class="icon-arrow">⚡</span>
+          </button>
+          <button class="btn-outline" onclick="openWhatsApp()">WhatsApp • Live Chat</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO / MAIN LANDING -->
+      <section id="hero" class="hero">
+        <div class="section-inner hero-grid">
+          <div>
+            <div class="hero-badge">
+              <div class="spark"></div>
+              Solar • Supreme Wealth Vehicle • Robotics
+            </div>
+            <h1 class="hero-title">
+              Turn sunlight, systems & sales into a
+              <span class="highlight">lifetime power & wealth machine.</span>
+            </h1>
+            <p class="hero-subtitle">
+              Sol Solar Solutions LLC helps <strong>homeowners and investors own their power</strong> – and also builds
+              a hand-picked team of <strong>closers, partners and field leaders</strong> who earn from solar deals,
+              commercial projects and Pudu service robots across the U.S.
+            </p>
+
+            <div class="hero-cta-row">
+              <button class="btn-primary" onclick="scrollToSection('lead')">
+                I Want Solar / Battery for My Property
+                <span class="icon-arrow">⚡</span>
+              </button>
+              <button class="btn-outline" onclick="scrollToSection('wealth')">
+                I Want to Join the Supreme Wealth Vehicle
+              </button>
+              <button class="btn-outline" onclick="scrollToSection('robots')">
+                I’m Interested in Pudu Robots
+              </button>
+            </div>
+
+            <p class="hero-cta-note">
+              One landing page. Three paths: <strong>1)</strong> Become a solar client. <strong>2)</strong> Join the
+              Supreme Wealth Vehicle & earn on large projects. <strong>3)</strong> Explore Pudu Robotics placements
+              for restaurants, hotels & more.
+            </p>
+
+            <div class="hero-meta">
+              <span><span class="dot"></span> Based in Southern California • Working select U.S. states</span>
+              <span>Solar deals, wealth vehicles & robotics on one streamlined funnel.</span>
+            </div>
+
+            <div class="hero-metrics">
+              <div class="metric">
+                <div class="metric-label">Ideal for</div>
+                <div class="metric-value">High-usage homes • Investors • Serious closers</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">What this page does</div>
+                <div class="metric-value">Captures leads • Books calls • Enables live transfer</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-right-stack">
+            <!-- LOGO VIDEO CARD USING YOUR EXACT IFRAME -->
+            <div class="logo-video-card">
+              <div class="logo-video-header">
+                <div class="logo-video-title">Company Emblem • Sol Solar Solutions</div>
+                <div class="logo-video-tag">Logo Video</div>
+              </div>
+              <div class="logo-video-wrapper">
+                <!-- Your iframe dropped in here with responsive styling from CSS -->
+                <iframe
+                  width="482"
+                  height="605"
+                  src="https://www.youtube.com/embed/WKlV_--5fy4"
+                  title="Sol Solar Solutions Logo"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                ></iframe>
+                <div class="logo-video-glow"></div>
+              </div>
+              <div class="logo-video-caption">
+                Your <strong>official logo video</strong> is framed here in a glowing emblem so your brand feels alive
+                the moment people land.
+              </div>
+            </div>
+
+            <!-- HERO CARD: SNAPSHOT -->
+            <div class="hero-card">
+              <div class="hero-card-header">
+                <div>
+                  <div class="hero-card-title">Live Power & Deals Snapshot</div>
+                  <div class="hero-card-subtitle">Example of how one funnel can feed everything</div>
+                </div>
+                <div class="hero-card-tag">
+                  <span class="pill-dot"></span>
+                  Solar • Wealth • Robotics
+                </div>
+              </div>
+
+              <div class="hero-card-main">
+                <div class="hero-roof">
+                  <div class="roof-label">Premium Solar + Battery</div>
+                  <div class="roof-graphic">
+                    <div class="roof-panels">
+                      <div class="roof-sheen"></div>
+                    </div>
+                    <div class="sun-orbit"></div>
+                  </div>
+                </div>
+
+                <div class="hero-data">
+                  <div>
+                    <div class="stat-row">
+                      <div class="stat-label">Today’s solar production</div>
+                      <div class="stat-value">54.3 kWh</div>
+                    </div>
+                    <div class="stat-row">
+                      <div class="stat-label">Battery reserve</div>
+                      <div class="stat-value">82% • Backup Ready</div>
+                    </div>
+                    <div class="stat-row">
+                      <div class="stat-label">Active deals in pipeline</div>
+                      <div class="stat-value">6 solar • 2 Pudu • 1 wealth vehicle</div>
+                    </div>
+                  </div>
+
+                  <div class="hero-progress">
+                    <div class="stat-row">
+                      <span class="stat-label">Estimated bill reduction</span>
+                      <span class="stat-value">≈ 64%</span>
+                    </div>
+                    <div class="progress-track">
+                      <div class="progress-fill"></div>
+                    </div>
+                    <div class="stat-row" style="margin-top:2px;">
+                      <span class="stat-label">Team earnings potential</span>
+                      <span class="stat-value">5–6 figures/yr with focus*</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hero-card-footer">
+                <div>
+                  <strong>One landing page, multiple income paths.</strong><br />
+                  Leads here can become solar clients, wealth vehicle partners, or robotics prospects.
+                  <div class="hero-chip-row">
+                    <div class="chip">Solar Client Leads</div>
+                    <div class="chip">Supreme Wealth Vehicle Partners</div>
+                    <div class="chip">Pudu Robotics Placements</div>
+                  </div>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font-size:11px;">Demo numbers – your results will be custom.</div>
+                  <div style="font-size:11px; color:#71718e;">*Income depends on performance & deals closed.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SOLAR SECTION -->
+      <section id="solar">
+        <div class="section-inner">
+          <div class="section-label">Solar Clients</div>
+          <div class="section-title-row">
+            <h2 class="section-title">High-performance solar & battery for serious homes & properties</h2>
+            <div class="section-sub">
+              For homeowners, investors and business owners who want their property to
+              <strong>pay them back</strong> instead of draining cash every month.
+            </div>
+          </div>
+
+          <div class="services-grid">
+            <article class="service-card">
+              <div class="service-pill"><span class="service-bullet"></span> Residential Elite</div>
+              <h3 class="service-title">Luxury Home Solar + Backup</h3>
+              <p class="service-body">
+                Custom arrays for 2,000–7,000 sq. ft. homes, estates and high-usage properties.
+                Built to look clean, perform hard and protect you during outages.
+              </p>
+              <ul class="service-list">
+                <li><span class="service-bullet"></span> Rooftop & ground-mount options</li>
+                <li><span class="service-bullet"></span> Premium American / Tier-1 panels</li>
+                <li><span class="service-bullet"></span> Whole-home or critical-load backup</li>
+                <li><span class="service-bullet"></span> EV & smart panel integrations</li>
+              </ul>
+              <div class="service-footer">
+                <span>Ideal bill: $250+/mo</span>
+                <span><a href="#lead">Request a solar quote →</a></span>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <div class="service-pill"><span class="service-bullet"></span> Commercial & Portfolio</div>
+              <h3 class="service-title">Commercial & Multi-Site Solar</h3>
+              <p class="service-body">
+                For car lots, plazas, rentals, industrial and small utility-scale plays.
+                Improve NOI, hedge against rate hikes and increase property value.
+              </p>
+              <ul class="service-list">
+                <li><span class="service-bullet"></span> 30–5,000+ kW strategies</li>
+                <li><span class="service-bullet"></span> Incentives, ITC & depreciation guidance</li>
+                <li><span class="service-bullet"></span> Carports, rooftops, ground arrays</li>
+                <li><span class="service-bullet"></span> Portfolio & multi-property plans</li>
+              </ul>
+              <div class="service-footer">
+                <span>Owners, investors, family offices</span>
+                <span><a href="#lead">Book a commercial call →</a></span>
+              </div>
+            </article>
+
+            <article class="service-card">
+              <div class="service-pill"><span class="service-bullet"></span> Backup & Stability</div>
+              <h3 class="service-title">Battery • Backup • Outage-Proofing</h3>
+              <p class="service-body">
+                Keep power flowing when the grid drops. Silent, clean backup instead of loud generators
+                and fuel runs in the dark.
+              </p>
+              <ul class="service-list">
+                <li><span class="service-bullet"></span> Enphase & leading battery options</li>
+                <li><span class="service-bullet"></span> Keep lights, A/C, Wi-Fi & more running</li>
+                <li><span class="service-bullet"></span> Generator coordination if needed</li>
+                <li><span class="service-bullet"></span> Future-ready for robotics & automation</li>
+              </ul>
+              <div class="service-footer">
+                <span>Solar + battery or battery-only</span>
+                <span><a href="#lead">Ask about backup →</a></span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUPREME WEALTH VEHICLE / RECRUITING -->
+      <section id="wealth">
+        <div class="section-inner">
+          <div class="section-label">Partners & Team</div>
+          <div class="section-title-row">
+            <h2 class="section-title">The Supreme Wealth Vehicle: earn from solar, portfolios & big projects</h2>
+            <div class="section-sub">
+              This is not a job board script. It’s a long-game wealth structure for people who want to
+              <strong>own a slice of the solar and clean-tech game</strong>, not just clock hours.
+            </div>
+          </div>
+
+          <div class="two-col-grid">
+            <div>
+              <p style="font-size:13px; color:var(--text-soft); margin-bottom:10px;">
+                We’re building a small, sharp inner circle of:
+              </p>
+              <ul class="service-list" style="margin-top:4px;">
+                <li><span class="service-bullet"></span> Solar openers & closers (residential + commercial)</li>
+                <li><span class="service-bullet"></span> Lead generators & social media assassins</li>
+                <li><span class="service-bullet"></span> Capital partners & land / portfolio connectors</li>
+              </ul>
+
+              <p style="font-size:13px; color:var(--text-soft); margin-top:8px;">
+                Deals can include high-ticket residential, commercial, and eventually large utility-scale or portfolio plays.
+                The goal is to build <strong>Supreme Wealth Vehicle structures</strong> that reward production, referrals and
+                long-term loyalty with serious upside.
+              </p>
+
+              <div class="pill-row">
+                <div class="pill-small">Commission-based & performance-based</div>
+                <div class="pill-small">1099 partners • Not employees</div>
+                <div class="pill-small">Solar • Land • Wealth Vehicles</div>
+              </div>
+
+              <p style="font-size:11px; color:#7b7ba1; margin-top:8px;">
+                *We’ll talk expectations, ethics and income possibilities on a live strategy call.
+                This is for motivated, self-directed people only.
+              </p>
+            </div>
+
+            <div class="contact-card">
+              <h3 style="font-size:15px; margin-bottom:4px;">Apply to join the Supreme Wealth Vehicle circle</h3>
+              <p style="font-size:13px; color:var(--text-soft);">
+                Share a few quick details. If it looks aligned, we’ll connect for a live call or WhatsApp to talk structure,
+                markets and deal flow.
+              </p>
+
+              <form onsubmit="handleWealthSubmit(event)">
+                <div class="field-row">
+                  <div class="field">
+                    <label for="w-name">Name</label>
+                    <input id="w-name" type="text" required placeholder="Your full name" />
+                  </div>
+                  <div class="field">
+                    <label for="w-phone">Phone / WhatsApp</label>
+                    <input id="w-phone" type="tel" required placeholder="Best number" />
+                  </div>
+                </div>
+                <div class="field-row">
+                  <div class="field">
+                    <label for="w-email">Email</label>
+                    <input id="w-email" type="email" required placeholder="you@example.com" />
+                  </div>
+                  <div class="field">
+                    <label for="w-role">How do you want to plug in?</label>
+                    <select id="w-role" required>
+                      <option value="">Select one</option>
+                      <option value="closer">Solar closer</option>
+                      <option value="opener">Appointment setter / opener</option>
+                      <option value="social">Social media / online lead gen</option>
+                      <option value="investor">Investor / capital partner</option>
+                      <option value="land">Land / portfolio connector</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="w-notes">What’s your experience & your income goal?</label>
+                  <textarea id="w-notes" placeholder="Example: sold solar, telecom, alarms, cars, etc. Targeting $10k–$30k+ per month with focus."></textarea>
+                </div>
+                <button type="submit" class="btn-primary">
+                  Submit Partner Application
+                  <span class="icon-arrow">↗</span>
+                </button>
+                <div class="form-footnote">
+                  This is a pre-qual form only. Final details, rates and agreements are always discussed live.
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PUDU ROBOTICS SECTION -->
+      <section id="robots">
+        <div class="section-inner">
+          <div class="section-label">Pudu Robotics</div>
+          <div class="section-title-row">
+            <h2 class="section-title">Pudu service robots for restaurants, hotels & next-level customer flow</h2>
+            <div class="section-sub">
+              As a referral / fronting partner with Pudu Robotics, we help match <strong>autonomous service robots</strong>
+              to real-world businesses that want to stand out and run smoother.
+            </div>
+          </div>
+
+          <div class="two-col-grid">
+            <div>
+              <p style="font-size:13px; color:var(--text-soft); margin-bottom:8px;">
+                Ideal fits for Pudu robots include:
+              </p>
+              <ul class="service-list" style="margin-top:4px;">
+                <li><span class="service-bullet"></span> Busy restaurants that want to wow guests & lift table turns</li>
+                <li><span class="service-bullet"></span> Hotels, lobbies & venues that want memorable service</li>
+                <li><span class="service-bullet"></span> Clinics, offices and malls that want smoother logistics</li>
+              </ul>
+
+              <p style="font-size:13px; color:var(--text-soft); margin-top:8px;">
+                We focus on serious, long-term placements where a robot helps you either
+                <strong>make more money, save on labor, or elevate your brand</strong> – ideally all three.
+              </p>
+
+              <div class="pill-row">
+                <div class="pill-small">Pudu BellaBot, KettyBot & more</div>
+                <div class="pill-small">Demos & pilot programs</div>
+                <div class="pill-small">Nationwide placements where available</div>
+              </div>
+            </div>
+
+            <div class="contact-card">
+              <h3 style="font-size:15px; margin-bottom:4px;">Tell us about your business & get Pudu info</h3>
+              <p style="font-size:13px; color:var(--text-soft);">
+                Share what kind of business you run and what you’d want a robot to do. We’ll follow up with options,
+                videos and ballpark pricing.
+              </p>
+
+              <form onsubmit="handlePuduSubmit(event)">
+                <div class="field-row">
+                  <div class="field">
+                    <label for="p-name">Name</label>
+                    <input id="p-name" type="text" required placeholder="Owner / manager name" />
+                  </div>
+                  <div class="field">
+                    <label for="p-business">Business name</label>
+                    <input id="p-business" type="text" required placeholder="Restaurant, hotel, etc." />
+                  </div>
+                </div>
+                <div class="field-row">
+                  <div class="field">
+                    <label for="p-city">City & State</label>
+                    <input id="p-city" type="text" required placeholder="City, State" />
+                  </div>
+                  <div class="field">
+                    <label for="p-contact">Contact email / phone</label>
+                    <input id="p-contact" type="text" required placeholder="Best way to reach you" />
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="p-use">How do you imagine using a robot?</label>
+                  <textarea id="p-use" placeholder="Example: food running, greeting, marketing, delivery, etc."></textarea>
+                </div>
+                <button type="submit" class="btn-primary">
+                  Send My Pudu Inquiry
+                  <span class="icon-arrow">↗</span>
+                </button>
+                <div class="form-footnote">
+                  We are a referral / fronting partner for Pudu robots. Final pricing and agreements are through official channels.
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIDEO SECTION -->
+      <section id="videos">
+        <div class="section-inner">
+          <div class="section-label">Video</div>
+          <div class="section-title-row">
+            <h2 class="section-title">See the vision in motion</h2>
+            <div class="section-sub">
+              Your main logo video is already live in the hero. Below, you can add additional Sora videos, client reels
+              or Pudu robot demos.
+            </div>
+          </div>
+
+          <div class="two-col-grid">
+            <div class="video-card">
+              <div class="mini-label">Logo Video (Hero)</div>
+              <h3 style="font-size:15px; margin:4px 0 6px;">Sol Solar Solutions Logo Animation</h3>
+              <p>
+                Your Shorts logo animation is showcased in the hero as a glowing emblem. Visitors see your brand in motion
+                the moment they land on the page.
+              </p>
+              <p style="font-size:11px; color:#7b7ba1; margin-top:8px;">
+                If you ever want a second version of the logo or a longer brand film, you can drop it into an extra player here as well.
+              </p>
+            </div>
+
+            <div class="video-card">
+              <div class="mini-label">Optional Second Video</div>
+              <h3 style="font-size:15px; margin:4px 0 6px;">Client results or Pudu robot demo</h3>
+              <p>
+                Use this space for a strong testimonial reel, a Pudu robot highlight, or a behind-the-scenes
+                breakdown of a big solar / wealth vehicle project.
+              </p>
+              <div class="video-grid" style="margin-top:10px;">
+                <div class="video-wrapper">
+                  <!-- Replace VIDEO_ID_SECOND with another YouTube ID when ready -->
+                  <iframe
+                    src="https://www.youtube.com/embed/VIDEO_ID_SECOND"
+                    title="Client Testimonial or Pudu Demo"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LEAD / APPOINTMENT / LIVE TRANSFER SECTION -->
+      <section id="lead">
+        <div class="section-inner">
+          <div class="section-label">Start / Apply / Book</div>
+          <div class="section-title-row">
+            <h2 class="section-title">One hub to capture leads, book calls & trigger live transfers</h2>
+          </div>
+
+          <div class="contact-grid">
+            <div class="contact-card">
+              <h3 style="font-size:15px; margin-bottom:4px;">Tell us who you are & what you want to do</h3>
+              <p style="font-size:13px; color:var(--text-soft);">
+                One form that routes everything: solar clients, wealth vehicle partners, Pudu robotics prospects.
+                You choose your path and we’ll respond accordingly.
+              </p>
+
+              <form onsubmit="handleLeadSubmit(event)">
+                <div class="field-row">
+                  <div class="field">
+                    <label for="l-name">Name</label>
+                    <input id="l-name" type="text" required placeholder="Your full name" />
+                  </div>
+                  <div class="field">
+                    <label for="l-phone">Phone / WhatsApp</label>
+                    <input id="l-phone" type="tel" required placeholder="Best number" />
+                  </div>
+                </div>
+
+                <div class="field-row">
+                  <div class="field">
+                    <label for="l-email">Email</label>
+                    <input id="l-email" type="email" required placeholder="you@example.com" />
+                  </div>
+                  <div class="field">
+                    <label for="l-track">What are you most interested in?</label>
+                    <select id="l-track" required>
+                      <option value="">Select one</option>
+                      <option value="solar-home">Solar / battery for my home</option>
+                      <option value="solar-commercial">Solar / battery for commercial or multi-site</option>
+                      <option value="wealth">Join the Supreme Wealth Vehicle</option>
+                      <option value="pudu">Pudu Robotics for my business</option>
+                      <option value="other">Other / not sure yet</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label for="l-notes">Details (property, experience, goals, timeline)</label>
+                  <textarea id="l-notes" placeholder="Example: My bill, property size, what kind of income or savings I want, or what business I run."></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">
+                  Submit & Trigger Follow-Up
+                  <span class="icon-arrow">↗</span>
+                </button>
+                <div class="form-footnote">
+                  In a live deployment, this form can send instantly to your CRM, AI dialer or live-transfer system
+                  so someone can call, text or WhatsApp the lead within minutes.
+                </div>
+              </form>
+            </div>
+
+            <div>
+              <div class="contact-card" style="margin-bottom:18px;">
+                <div class="mini-label">Instant Contact</div>
+                <h3 style="font-size:15px; margin:4px 0 6px;">Call, text or WhatsApp for a live transfer</h3>
+                <p style="font-size:13px; color:var(--text-soft);">
+                  If you want a human response right now, use these:
+                </p>
+                <ul class="service-list" style="margin-top:6px;">
+                  <li>
+                    <span class="service-bullet"></span>
+                    Phone / SMS / WhatsApp:
+                    <a href="tel:+19495915731" style="color:var(--accent-gold-soft); font-weight:600;">+1 (949) 591-5731</a>
+                  </li>
+                  <li>
+                    <span class="service-bullet"></span>
+                    Email:
+                    <a href="mailto:solsolarsolutions@icloud.com" style="color:var(--accent-gold-soft); font-weight:600;">
+                      solsolarsolutions@icloud.com
+                    </a>
+                  </li>
+                </ul>
+                <p style="font-size:11px; color:#7b7ba1; margin-top:6px;">
+                  On the tech side, you can point this page’s forms to a CRM (HubSpot, GoHighLevel, Close, etc.) and then
+                  have an AI / human dialer live-transfer to you when leads come in during set hours.
+                </p>
+                <button class="btn-outline" style="margin-top:8px;" onclick="openWhatsApp()">
+                  Open WhatsApp Chat
+                </button>
+              </div>
+
+              <div class="contact-card">
+                <div class="mini-label">Optional: calendar embed</div>
+                <h3 style="font-size:15px; margin:4px 0 6px;">Drop in your Calendly or booking link</h3>
+                <p style="font-size:13px; color:var(--text-soft);">
+                  Replace this block with your calendar embed so people can book a time instantly.
+                </p>
+                <div class="video-wrapper" style="margin-top:10px;">
+                  <!-- Example placeholder for Calendly or other booking widget -->
+                  <iframe
+                    src="about:blank"
+                    title="Book a Call"
+                  ></iframe>
+                </div>
+                <p style="font-size:11px; color:#7b7ba1; margin-top:8px;">
+                  For Calendly: use their “Embed on your website” code and paste it here later.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div>© <span id="year"></span> Sol Solar Solutions LLC. All rights reserved.</div>
+        <div class="footer-links">
+          <a href="#hero">Home</a>
+          <a href="#solar">Solar</a>
+          <a href="#wealth">Wealth Vehicle</a>
+          <a href="#robots">Robotics</a>
+          <a href="#lead">Lead / Book</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function toggleMobileNav() {
+      const mobileNav = document.getElementById("mobileNav");
+      if (!mobileNav) return;
+      mobileNav.style.display =
+        mobileNav.style.display === "none" || mobileNav.style.display === ""
+          ? "flex"
+          : "none";
+    }
+
+    function openWhatsApp() {
+      const phone = "19495915731";
+      const msg = encodeURIComponent(
+        "Hi, I’m reaching out from your Sol Solar Solutions landing page. I’d like to talk about solar / the wealth vehicle / Pudu robots."
+      );
+      window.open(`https://wa.me/${phone}?text=${msg}`, "_blank");
+    }
+
+    function handleLeadSubmit(e) {
+      e.preventDefault();
+      alert(
+        "Lead form submitted in this demo.\\n\\nWhen this page is live, connect this form to your CRM or AI dialer to trigger instant follow-up and live transfers."
+      );
+    }
+
+    function handleWealthSubmit(e) {
+      e.preventDefault();
+      alert(
+        "Supreme Wealth Vehicle application captured in this demo.\\n\\nOn a live build, this would flow into your private pipeline so you can review partners and schedule strategy calls."
+      );
+    }
+
+    function handlePuduSubmit(e) {
+      e.preventDefault();
+      alert(
+        "Pudu Robotics inquiry captured in this demo.\\n\\nIn production, this would notify you so you can send videos, pricing ranges and set a discovery call."
+      );
+    }
+  </script>
+</body>
+</html>
